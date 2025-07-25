@@ -1,17 +1,28 @@
 {
   "name": "cypress-cucumber-tests",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
-    "cypress": "^14.5.2"
+    "@badeball/cypress-cucumber-preprocessor": "^18.0.6",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "cypress": "^13.6.3"
+  },
+  "cypress": {
+    "fileServerFolder": ".",
+    "fixturesFolder": "cypress/fixtures",
+    "integrationFolder": "cypress/e2e",
+    "pluginsFile": "cypress/plugins/index.js",
+    "supportFile": "cypress/support/e2e.js",
+    "videosFolder": "cypress/videos",
+    "screenshotsFolder": "cypress/screenshots",
+    "baseurl": "http://localhost:8080"
   }
 }

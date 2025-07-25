@@ -16,8 +16,9 @@ Abre tu aplicación Terminal (puedes buscarla en Spotlight con Cmd + Espacio y e
 Pega y ejecuta el siguiente comando:
 
 Bash
-
+``` bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 Sigue las instrucciones en la terminal (puede que te pida tu contraseña de usuario).
 
 Node.js y npm (Con Homebrew): Son esenciales para ejecutar Cypress y gestionar sus dependencias.
@@ -25,14 +26,16 @@ Node.js y npm (Con Homebrew): Son esenciales para ejecutar Cypress y gestionar s
 En tu Terminal, ejecuta:
 
 Bash
-
+```bash
 brew install node
+```
 Verifica la instalación:
 
 Bash
-
+```bash
 node -v
 npm -v
+```
 Deberías ver los números de versión de Node y npm.
 
 Git (Con Homebrew): El sistema de control de versiones necesario para interactuar con GitHub.
@@ -40,13 +43,14 @@ Git (Con Homebrew): El sistema de control de versiones necesario para interactua
 En tu Terminal, ejecuta:
 
 Bash
-
+```bash
 brew install git
 Verifica la instalación:
-
+```
 Bash
-
+```bash
 git --version
+```
 Deberías ver el número de versión de Git.
 
 Visual Studio Code (VS Code): Tu editor de código principal.
@@ -73,14 +77,16 @@ Abre tu Terminal.
 Navega a la ubicación donde quieres guardar tu proyecto (ej. Documents o Desktop).
 
 Bash
-
+```bash
 cd ~/Documents/
+```
 Crea una nueva carpeta para tu proyecto y entra en ella:
 
 Bash
-
+```bash
 mkdir cypress-bdd-project
 cd cypress-bdd-project
+```
 Posibles Desafíos:
 
 mkdir: cannot create directory ‘cypress-bdd-project’: File exists: La carpeta ya existe. Prueba con otro nombre o asegúrate de que no haya una carpeta con ese nombre.
@@ -92,8 +98,9 @@ Inicializa un Proyecto Node.js:
 Esto creará un archivo package.json que gestionará las dependencias de tu proyecto.
 
 Bash
-
+```bash
 npm init -y
+```
 Resultado esperado: Se creará el archivo package.json en tu carpeta cypress-bdd-project.
 
 Posibles Desafíos:
@@ -105,8 +112,9 @@ Instala Cypress:
 Instala Cypress como una dependencia de desarrollo.
 
 Bash
-
+```bash
 npm install cypress --save-dev
+```
 Resultado esperado: Cypress se instalará y se añadirá a devDependencies en package.json. Se creará la carpeta node_modules.
 
 Posibles Desafíos:
@@ -120,8 +128,9 @@ Abre Cypress por Primera Vez:
 Esto generará la estructura básica de carpetas de Cypress.
 
 Bash
-
+```bash
 npx cypress open
+```
 Resultado esperado: Se abrirá la interfaz de usuario de Cypress. Sigue las instrucciones para configurar las pruebas E2E (End-to-End). Cypress creará automáticamente las carpetas cypress/ y el archivo cypress.config.js. Cuando se haya creado, puedes cerrar la UI de Cypress.
 
 Posibles Desafíos:
@@ -133,8 +142,9 @@ Instala el Preprocesador de Cucumber para Cypress:
 Estos paquetes te permitirán escribir tus tests en formato Gherkin (.feature).
 
 Bash
-
+```bash
 npm install @badeball/cypress-cucumber-preprocessor @bahmutov/cypress-esbuild-preprocessor --save-dev
+```
 Resultado esperado: Los paquetes se instalarán y se añadirán a devDependencies en package.json.
 
 Configura Cypress para Usar Cucumber:
@@ -142,8 +152,9 @@ Configura Cypress para Usar Cucumber:
 Abre tu proyecto en VS Code:
 
 Bash
-
+```bash
 code .
+```
 Edita cypress.config.js:
 
 Ubicación: cypress-bdd-project/cypress.config.js
@@ -151,7 +162,7 @@ Ubicación: cypress-bdd-project/cypress.config.js
 Contenido: Reemplaza el contenido existente con esto. Este código le indica a Cypress que use el preprocesador de Cucumber y que busque tus archivos de prueba con la extensión .feature.
 
 JavaScript
-
+```javascript
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const addCucumberPreprocessorPlugin =
@@ -176,6 +187,7 @@ module.exports = defineConfig({
     },
   },
 });
+```
 Edita package.json:
 
 Ubicación: cypress-bdd-project/package.json
@@ -183,7 +195,7 @@ Ubicación: cypress-bdd-project/package.json
 Contenido: Asegúrate de que tu package.json tenga la sección devDependencies con las dependencias instaladas y, opcionalmente, una sección cypress para configurar rutas si es necesario (aunque cypress.config.js ahora es el método preferido). Si usas la configuración del cypress.config.js anterior, esta sección cypress en el package.json puede no ser estrictamente necesaria, pero es buena idea revisarla.
 
 JSON
-
+```json
 {
   "name": "cypress-bdd-project",
   "version": "1.0.0",
@@ -207,6 +219,7 @@ JSON
     "cypress": "^13.6.3"
   }
 }
+```
 Posibles Desafíos:
 
 Errores de sintaxis en cypress.config.js o package.json: VS Code te los indicará. Revisa cuidadosamente los corchetes {} y las comas ,.
@@ -224,8 +237,9 @@ Ubicación: cypress-bdd-project/cypress/e2e/login.feature
 Contenido:
 
 Gherkin
-
+```gherkin
 # cypress/e2e/login.feature
+```
 
 Característica: Inicio de Sesión de Usuario
   Como un usuario, quiero iniciar sesión en la aplicación
@@ -244,7 +258,7 @@ Ubicación: cypress-bdd-project/cypress/e2e/login.js
 Contenido: Usaremos el sitio de demostración de OrangeHRM para un ejemplo real.
 
 JavaScript
-
+```javascript
 // cypress/e2e/login.js
 
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
@@ -275,6 +289,7 @@ Then("debería ver {string} en el encabezado", (headerText) => {
 // Then("debería ver un mensaje de error {string}", (errorMessage) => {
 //   cy.get('.oxd-alert-content-text').should('contain', errorMessage);
 // });
+```
 Posibles Desafíos:
 
 Errores de mapeo entre Gherkin y JavaScript: Asegúrate de que el texto de tus pasos en login.feature coincida exactamente con las expresiones regulares o strings en login.js. Por ejemplo, "ingreso el usuario {string} y la contraseña {string}" en JS debe coincidir con ingreso el usuario "Admin" y la contraseña "admin123" en Gherkin.
@@ -286,8 +301,9 @@ Ejecuta tus Tests (Localmente):
 En tu Terminal, dentro de la carpeta cypress-bdd-project:
 
 Bash
-
+```bash
 npm run cypress:open
+```
 Resultado esperado: Se abrirá la interfaz de Cypress. Selecciona "E2E Testing" y luego haz clic en tu archivo login.feature. Cypress ejecutará las pruebas en el navegador.
 
 Paso 2: Vincular tu Proyecto Local con GitHub
@@ -321,8 +337,9 @@ Inicializa Git en tu Proyecto Local:
 Abre tu Terminal en VS Code (o Terminal normal) y asegúrate de estar en la raíz de cypress-bdd-project.
 
 Bash
-
+```bash
   git init
+  ```
 Resultado esperado: Initialized empty Git repository in /Users/edgarvillegas/Documents/cypress-bdd-project/.git/. Esto crea la carpeta .git y convierte tu carpeta en un repositorio Git local.
 
 Configura el .gitignore:
@@ -338,6 +355,7 @@ cypress/videos/
 cypress/screenshots/
 npm-debug.log*
 .DS_Store # Archivo específico de macOS
+
 Posibles Desafíos:
 
 ls -a no muestra .gitignore: Asegúrate de que el nombre sea exactamente .gitignore (con el punto al principio).
@@ -347,8 +365,9 @@ Añade los Archivos para el Primer Commit:
 Esto selecciona todos los archivos de tu proyecto (excepto los listados en .gitignore) para ser incluidos en el próximo "commit".
 
 Bash
-
+```bash
   git add .
+  ```
 Resultado esperado: La terminal no mostrará nada si fue exitoso, pero tus archivos estarán "stageados" (preparados).
 
 Realiza tu Primer Commit:
@@ -356,8 +375,9 @@ Realiza tu Primer Commit:
 Esto guarda una instantánea de tu proyecto en el historial de Git local.
 
 Bash
-
+```bash
   git commit -m "Initial project setup with Cypress, Cucumber, and basic login test"
+  ```
 Resultado esperado: Verás una lista de los archivos que se han "comiteado".
 
 Posibles Desafíos:
@@ -371,8 +391,9 @@ Renombra la Rama Principal a main:
 La convención moderna es usar main en lugar de master para la rama principal.
 
 Bash
-
+```bash
   git branch -M main
+```  
 Resultado esperado: No verás una confirmación explícita, pero la rama se habrá renombrado.
 
 Conecta tu Repositorio Local con el Remoto de GitHub:
@@ -380,8 +401,9 @@ Conecta tu Repositorio Local con el Remoto de GitHub:
 Aquí es donde le dices a Git la URL de tu repositorio en GitHub.
 
 Bash
-
+```bash
   git remote add origin https://github.com/EdgarViOl/cypress-bdd-project.git
+  ```
 ¡IMPORTANTE! Reemplaza https://github.com/EdgarViOl/cypress-bdd-project.git con la URL exacta de TU nuevo repositorio que obtuviste en el Paso 2.1.
 
 Resultado esperado: No verás ninguna confirmación si fue exitoso.
@@ -395,8 +417,9 @@ Sube tu Proyecto Local a GitHub (¡El Primer Push!):
 Este es el momento de enviar todos tus archivos y el historial de tu proyecto a GitHub.
 
 Bash
-
+```bash
   git push -u origin main
+  ```
 Resultado esperado: Se te pedirá tu nombre de usuario de GitHub y tu Personal Access Token (PAT) como contraseña.
 
 Si no tienes un PAT:
@@ -423,9 +446,11 @@ Usa este token como contraseña cuando Git te lo pida en la terminal.
 
 Resultado final esperado: Verás mensajes de progreso de subida y, finalmente, algo como:
 
+```bash
 To https://github.com/EdgarViOl/cypress-bdd-project.git
  * [new branch]      main -> main
 branch 'main' set up to track 'origin/main'.
+```
 Posibles Desafíos (y Soluciones):
 
 ! [rejected] main -> main (non-fast-forward): Esto significa que el repositorio de GitHub tiene commits que tú no tienes. Solución: Primero necesitas traer esos cambios (git pull origin main --allow-unrelated-histories si no has hecho ningún cambio, o git pull origin main --rebase si tuvieras cambios locales). PERO, como creamos el repo de GitHub vacío, este error no debería ocurrir. Si ocurre, es que el repo de GitHub no estaba vacío. Tendrías que volver al Paso 2.1 y asegurarte de que lo creaste sin README.md, etc., y si es necesario, eliminarlo y crearlo de nuevo.
@@ -433,6 +458,7 @@ Posibles Desafíos (y Soluciones):
 fatal: Authentication failed for ...: Tu nombre de usuario o PAT es incorrecto. Vuelve a generar/copiar el PAT cuidadosamente.
 
 error: src refspec main does not match any: Te saltaste el git commit antes de hacer el push. Vuelve al Paso 2.5.
+
 
 Verificación Final
 Abre tu navegador y ve a la URL de tu nuevo repositorio en GitHub (ej. https://github.com/EdgarViOl/cypress-bdd-project).
