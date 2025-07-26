@@ -1,5 +1,3 @@
-// cypress/e2e/search/search.js
-
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Given("que estoy en la página de inicio de Google", () => {

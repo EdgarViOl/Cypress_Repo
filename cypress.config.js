@@ -2,25 +2,22 @@ const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const addCucumberPreprocessorPlugin =
   require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
-
-// YA NO NECESITAS IMPORTAR createEsbuildPlugin DIRECTAMENTE ASÍ:
-// const createEsbuildPlugin = require("@bahmutov/cypress-esbuild-preprocessor").createEsbuildPlugin;
+const createEsbuildPlugin =
+  require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
 module.exports = defineConfig({
   e2e: {
-    specPattern: "**/*.feature",
     async setupNodeEvents(on, config) {
+      const bundler = createBundler({
+        plugins: [createEsbuildPlugin(config)],
+      });
       await addCucumberPreprocessorPlugin(on, config);
-
-      on(
-        "file:preprocessor",
-        createBundler({
-          // ESTA ES LA LÍNEA CLAVE QUE CAMBIAMOS
-          plugins: [require("@badeball/cypress-cucumber-preprocessor/esbuild").default()],
-        })
-      );
+      on("file:preprocessor", bundler);
 
       return config;
     },
+  specPattern: "cypress/e2e/**/*.feature",
+  chromeWebSecurity: false, 
   },
+  
 });

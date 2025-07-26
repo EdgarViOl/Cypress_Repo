@@ -8,3 +8,8 @@ Feature: User Login
     And I click the login button
     Then I should be logged in successfully
     And I should see "Welcome, testuser!"
+  Examples:
+    | username  | password     |
+    | testuser  | password123  |
+    | admin     | adminpass    |
+    | student     | Pasword123    |

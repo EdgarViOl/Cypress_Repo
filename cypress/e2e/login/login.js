@@ -1,7 +1,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 Given("I am on the login page", () => {
-  cy.visit("https://www.example.com/login"); // Cambia esto por tu URL de login real
+  cy.visit("https://practicetestautomation.com/practice-test-login/"); // Cambia esto por tu URL de login real
 });
 
 When("I enter username {string} and password {string}", (username, password) => {
